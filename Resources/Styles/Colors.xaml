@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="AppBlack">#000000</Color>
+    <Color x:Key="AppWhite">#FFFFFF</Color>
+    <Color x:Key="AppGray">#888888</Color>
+    <Color x:Key="AppOverlay">#99000000</Color>
+    <Color x:Key="CardBackground">#1AFFFFFF</Color>
+    <Color x:Key="CardBorder">#33FFFFFF</Color>
+    <Color x:Key="MintGreen">#3EB489</Color>
+
+</ResourceDictionary>

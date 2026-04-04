@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net9.0-ios</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>OptishotV1DOTNET</RootNamespace>
+    <AssemblyName>OptishotV1DOTNET</AssemblyName>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationId>com.optishot.v1dotnet</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiIcon Include="Resources/AppIcon/appicon.svg" Color="#000000" />
+    <MauiSplashScreen Include="Resources/Splash/splash.svg" Color="#000000" BaseSize="128,128" />
+    <MauiFont Include="Resources/Fonts/OpenSans-Regular.ttf" LogicalName="OpenSansRegular" />
+    <MauiFont Include="Resources/Fonts/OpenSans-Semibold.ttf" LogicalName="OpenSansSemibold" />
+  </ItemGroup>
+</Project>

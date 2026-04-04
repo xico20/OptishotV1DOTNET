@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OptishotV1DOTNET.Controls"
+             xmlns:vm="clr-namespace:OptishotV1DOTNET.ViewModels"
+             x:Class="OptishotV1DOTNET.Views.CameraPage"
+             BackgroundColor="Black"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+
+        <!-- Layer 0: Live camera preview (full screen) -->
+        <controls:CameraPreviewView
+            x:Name="CameraPreview"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+
+        <!-- Layer 1: Coaching tips (top) -->
+        <controls:CoachingOverlay
+            Tips="{Binding AppState.CurrentTips}"
+            VerticalOptions="Start"
+            Margin="0,60,0,0" />
+
+        <!-- Layer 2: Bottom controls -->
+        <VerticalStackLayout
+            VerticalOptions="End"
+            Spacing="14"
+            Padding="20,0,20,40">
+
+            <!-- Lighting status badge (conditional) -->
+            <controls:LightingOverlay
+                Condition="{Binding AppState.LightingCondition}"
+                HorizontalOptions="Center"
+                IsVisible="{Binding AppState.LightingFeatureEnabled}" />
+
+            <!-- Clutter warning (conditional) -->
+            <controls:ClutterWarningOverlay
+                ClutterObjects="{Binding AppState.DetectedClutter}"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding AppState.CompositionFeatureEnabled}" />
+
+            <!-- Feature toggles -->
+            <controls:ModeSelector
+                HorizontalOptions="Center"
+                LightingEnabled="{Binding AppState.LightingFeatureEnabled}"
+                CompositionEnabled="{Binding AppState.CompositionFeatureEnabled}"
+                ToggleLightingCommand="{Binding ToggleLightingCommand}"
+                ToggleCompositionCommand="{Binding ToggleCompositionCommand}" />
+
+            <!-- Camera controls row -->
+            <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Center">
+
+                <!-- Switch camera -->
+                <ImageButton
+                    Grid.Column="0"
+                    x:Name="SwitchCameraButton"
+                    Command="{Binding SwitchCameraCommand}"
+                    BackgroundColor="#44FFFFFF"
+                    CornerRadius="24"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    HorizontalOptions="Center">
+                    <ImageButton.Source>
+                        <FontImageSource Glyph="⟳" FontFamily="OpenSansRegular" Size="24" Color="White" />
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <!-- Shutter button -->
+                <Button
+                    Grid.Column="1"
+                    x:Name="ShutterBtn"
+                    Command="{Binding CapturePhotoCommand}"
+                    BackgroundColor="Transparent"
+                    BorderColor="White"
+                    BorderWidth="3"
+                    CornerRadius="36"
+                    WidthRequest="72"
+                    HeightRequest="72"
+                    HorizontalOptions="Center" />
+
+                <!-- Last photo thumbnail -->
+                <Frame
+                    Grid.Column="2"
+                    CornerRadius="8"
+                    Padding="0"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    HasShadow="False"
+                    BackgroundColor="#44FFFFFF"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding AppState.LastCapturedPhoto, Converter={StaticResource NotNullToBoolConverter}}">
+                    <Image
+                        x:Name="ThumbnailImage"
+                        Aspect="AspectFill" />
+                </Frame>
+
+            </Grid>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

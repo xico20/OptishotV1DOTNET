@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OptishotV1DOTNET.Controls.ModeSelector">
+    <Frame
+        BackgroundColor="#99000000"
+        CornerRadius="24"
+        Padding="6"
+        HasShadow="False">
+        <HorizontalStackLayout Spacing="4">
+
+            <!-- Lighting toggle -->
+            <Frame
+                x:Name="LightingFrame"
+                CornerRadius="18"
+                Padding="14,8"
+                HasShadow="False">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ToggleLightingCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" />
+                </Frame.GestureRecognizers>
+                <HorizontalStackLayout Spacing="6">
+                    <Label
+                        x:Name="LightingIcon"
+                        Text="☀"
+                        FontSize="15"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="LightingLabel"
+                        Text="Light"
+                        FontSize="14"
+                        FontAttributes="Semibold"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Composition toggle -->
+            <Frame
+                x:Name="CompositionFrame"
+                CornerRadius="18"
+                Padding="14,8"
+                HasShadow="False">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ToggleCompositionCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" />
+                </Frame.GestureRecognizers>
+                <HorizontalStackLayout Spacing="6">
+                    <Label
+                        x:Name="CompositionIcon"
+                        Text="✦"
+                        FontSize="15"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="CompositionLabel"
+                        Text="Clean"
+                        FontSize="14"
+                        FontAttributes="Semibold"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Frame>
+
+        </HorizontalStackLayout>
+    </Frame>
+</ContentView>
