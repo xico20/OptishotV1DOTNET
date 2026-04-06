@@ -5,6 +5,7 @@ public enum TipCategory
     Lighting,
     Composition,
     Alignment,
+    Stability,
     General
 }
 
@@ -29,6 +30,7 @@ public class CoachingTip : IEquatable<CoachingTip>
         TipCategory.Lighting    => "☀",
         TipCategory.Composition => "⊞",
         TipCategory.Alignment   => "⊕",
+        TipCategory.Stability   => "◎",
         TipCategory.General     => "💡",
         _                       => "●"
     };

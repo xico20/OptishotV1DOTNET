@@ -5,8 +5,14 @@ public class LuminanceStats
     public float Mean { get; init; }
     public float StandardDeviation { get; init; }
 
+    // 0=blurry, 1=sharp — based on mean gradient magnitude across sampled pixels
+    public float SharpnessScore { get; init; }
+
     // [TopLeft, TopRight, BottomLeft, BottomRight]
     public float[] QuadrantMeans { get; init; } = new float[4];
+
+    // 8x8 grid of cell means — used by FrameAnalyzer to detect camera shake between frames
+    public float[] GridMeans { get; init; } = new float[64];
 
     public int BrightestQuadrant
     {
@@ -38,6 +44,9 @@ public class FrameAnalysisResult
     public LightingCondition LightingCondition { get; init; } = LightingCondition.Unknown;
     public LuminanceStats LuminanceStats { get; init; } = new();
     public IReadOnlyList<DetectedObject> DetectedObjects { get; init; } = Array.Empty<DetectedObject>();
+
+    // 0=still, 1=very shaky — computed by FrameAnalyzer comparing consecutive grid means
+    public float ShakeScore { get; init; }
 
     public IEnumerable<DetectedObject> ClutterObjects =>
         DetectedObjects.Where(o => o.IsClutter);

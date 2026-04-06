@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/franc/OneDrive/TUDO/Ambiente de Trabalho/Archive//**)",
+      "Read(//c/Users/franc/Desktop/**)",
+      "Read(//c/Users/franc/OneDrive/Desktop/**)",
+      "Bash(dotnet --version)",
+      "Bash(dotnet workload:*)",
+      "Bash(dotnet add:*)",
+      "Bash(rm:*)"
+    ]
+  }
+}

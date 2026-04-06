@@ -1,3 +1,4 @@
+using System.Linq;
 using AVFoundation;
 using CoreFoundation;
 using CoreMedia;
@@ -5,7 +6,7 @@ using CoreVideo;
 using Foundation;
 using Photos;
 using UIKit;
-using OptishotV1DOTNET.Services;
+using OptishotV1DOTNET.Core.Camera;
 
 namespace OptishotV1DOTNET.Platforms.iOS;
 
@@ -115,7 +116,7 @@ public class CameraService : NSObject, ICameraService, IAVCaptureVideoDataOutput
               NSNumber.FromInt32((int)CVPixelFormatType.CV32BGRA) }
         };
         _videoOutput.AlwaysDiscardsLateVideoFrames = true;
-        _videoOutput.SetSampleBufferDelegateQueue(this, _videoQueue);
+        _videoOutput.SetSampleBufferDelegate(this, _videoQueue);
 
         if (_session.CanAddOutput(_videoOutput))
             _session.AddOutput(_videoOutput);
@@ -233,10 +234,6 @@ public class CameraService : NSObject, ICameraService, IAVCaptureVideoDataOutput
         _photoCaptureTcs = new TaskCompletionSource<byte[]?>();
 
         var settings = AVCapturePhotoSettings.Create();
-        if (_photoOutput.AvailablePhotoCodecTypes.Contains(AVVideoCodecType.Hevc))
-            settings = AVCapturePhotoSettings.FromFormat(
-                new NSDictionary<NSString, NSObject>(
-                    AVVideo.CodecKey, new NSString(AVVideoCodecType.Hevc)));
 
         settings.MaxPhotoDimensions = _photoOutput.MaxPhotoDimensions;
 

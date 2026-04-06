@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OptishotV1DOTNET.UI.Overlays.ClutterWarningOverlay">
+    <Frame
+        BackgroundColor="#CCFF6B00"
+        CornerRadius="12"
+        Padding="14,10"
+        HasShadow="False">
+        <HorizontalStackLayout Spacing="10">
+            <Label
+                Text="⚠"
+                FontSize="18"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <VerticalStackLayout Spacing="2">
+                <Label
+                    Text="COMPOSITION ALERT"
+                    FontSize="11"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    CharacterSpacing="1.5" />
+                <Label
+                    x:Name="MessageLabel"
+                    Text="{Binding Message, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                    FontSize="13"
+                    TextColor="White" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </Frame>
+</ContentView>

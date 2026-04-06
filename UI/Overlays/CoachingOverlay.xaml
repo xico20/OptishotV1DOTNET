@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:OptishotV1DOTNET.Models"
+             x:Class="OptishotV1DOTNET.UI.Overlays.CoachingOverlay">
+    <VerticalStackLayout
+        x:Name="TipsStack"
+        Spacing="8"
+        Padding="16,0">
+        <BindableLayout.ItemsSource>
+            <Binding Path="Tips" Source="{RelativeSource AncestorType={x:Type ContentView}}" />
+        </BindableLayout.ItemsSource>
+        <BindableLayout.ItemTemplate>
+            <DataTemplate x:DataType="models:CoachingTip">
+                <Frame
+                    BackgroundColor="#CC1C1C1E"
+                    BorderColor="#44FFFFFF"
+                    CornerRadius="14"
+                    Padding="12,10"
+                    HasShadow="False">
+                    <HorizontalStackLayout Spacing="10">
+                        <!-- Icon circle -->
+                        <Frame
+                            BackgroundColor="#33FFFFFF"
+                            CornerRadius="16"
+                            Padding="0"
+                            WidthRequest="32"
+                            HeightRequest="32"
+                            HasShadow="False">
+                            <Label
+                                Text="{Binding IconGlyph}"
+                                FontSize="16"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center" />
+                        </Frame>
+                        <!-- Message -->
+                        <Label
+                            Text="{Binding Message}"
+                            TextColor="White"
+                            FontSize="14"
+                            VerticalOptions="Center"
+                            HorizontalOptions="FillAndExpand" />
+                    </HorizontalStackLayout>
+                </Frame>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </VerticalStackLayout>
+</ContentView>

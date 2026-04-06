@@ -1,6 +1,5 @@
 using Microsoft.Maui.Handlers;
-using OptishotV1DOTNET.Controls;
-using OptishotV1DOTNET.Services;
+using OptishotV1DOTNET.Core.Camera;
 using UIKit;
 
 namespace OptishotV1DOTNET.Platforms.iOS;

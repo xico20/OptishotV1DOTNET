@@ -1,4 +1,4 @@
-using OptishotV1DOTNET.Views;
+using OptishotV1DOTNET.UI.Screens;
 using OptishotV1DOTNET.ViewModels;
 
 namespace OptishotV1DOTNET;

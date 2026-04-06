@@ -1,9 +1,11 @@
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using OptishotV1DOTNET.Controls;
-using OptishotV1DOTNET.Services;
+using OptishotV1DOTNET.Core.Camera;
+using OptishotV1DOTNET.Core.Vision;
+using OptishotV1DOTNET.Features.Coaching;
+using OptishotV1DOTNET.Features.Lighting;
+using OptishotV1DOTNET.UI.Screens;
 using OptishotV1DOTNET.ViewModels;
-using OptishotV1DOTNET.Views;
 
 namespace OptishotV1DOTNET;
 
@@ -25,23 +27,32 @@ public static class MauiProgram
 #if IOS
                 handlers.AddHandler<CameraPreviewView, OptishotV1DOTNET.Platforms.iOS.CameraPreviewHandler>();
 #endif
+#if ANDROID
+                handlers.AddHandler<CameraPreviewView, OptishotV1DOTNET.Platforms.Android.CameraPreviewHandler>();
+#endif
             });
 
-        // Core services
+        // ── Core ────────────────────────────────────────
         builder.Services.AddSingleton<AppState>();
         builder.Services.AddSingleton<FrameAnalyzer>();
-        builder.Services.AddSingleton<CoachingEngine>();
-        builder.Services.AddSingleton<LightingAssistant>();
 
+        // ── Platform camera service ─────────────────────
 #if IOS
         builder.Services.AddSingleton<ICameraService, OptishotV1DOTNET.Platforms.iOS.CameraService>();
 #endif
+#if ANDROID
+        builder.Services.AddSingleton<ICameraService, OptishotV1DOTNET.Platforms.Android.CameraService>();
+#endif
 
-        // ViewModels
+        // ── Features ────────────────────────────────────
+        builder.Services.AddSingleton<CoachingEngine>();
+        builder.Services.AddSingleton<LightingAssistant>();
+
+        // ── ViewModels ──────────────────────────────────
         builder.Services.AddTransient<ModeSelectionViewModel>();
         builder.Services.AddTransient<CameraViewModel>();
 
-        // Pages
+        // ── Pages ───────────────────────────────────────
         builder.Services.AddTransient<ModeSelectionPage>();
         builder.Services.AddTransient<CameraPage>();
 

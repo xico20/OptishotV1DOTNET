@@ -1,0 +1,191 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="OptishotV1 Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITLE -->
+        <mxCell id="title" value="OptishotV1 — Arquitetura" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="20" width="400" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER: VIEWS -->
+        <!-- ═══════════════════════════════════════════ -->
+        <mxCell id="layer_views" value="Views (XAML)" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="340" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="v_mode" value="ModeSelectionPage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#6c8ebf;" vertex="1" parent="layer_views">
+          <mxGeometry x="20" y="50" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v_camera" value="CameraPage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#6c8ebf;" vertex="1" parent="layer_views">
+          <mxGeometry x="180" y="50" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- LAYER: CONTROLS -->
+        <mxCell id="layer_controls" value="Controls" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="layer_views">
+          <mxGeometry x="20" y="100" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="CameraPreviewView" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=10;" vertex="1" parent="layer_controls">
+          <mxGeometry x="10" y="10" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="LightingOverlay&#xa;ClutterOverlay&#xa;CoachingOverlay&#xa;ModeSelector" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#82b366;fontSize=10;" vertex="1" parent="layer_controls">
+          <mxGeometry x="145" y="10" width="145" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER: VIEWMODELS -->
+        <!-- ═══════════════════════════════════════════ -->
+        <mxCell id="layer_vm" value="ViewModels" style="swimlane;startSize=30;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="440" y="80" width="320" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="vm_mode" value="ModeSelectionViewModel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#d6b656;" vertex="1" parent="layer_vm">
+          <mxGeometry x="20" y="50" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vm_camera" value="CameraViewModel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#d6b656;" vertex="1" parent="layer_vm">
+          <mxGeometry x="20" y="105" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vm_appstate" value="AppState (global)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="layer_vm">
+          <mxGeometry x="170" y="105" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER: SERVICES -->
+        <!-- ═══════════════════════════════════════════ -->
+        <mxCell id="layer_svc" value="Services (independentes da plataforma)" style="swimlane;startSize=30;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="440" y="310" width="560" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="s_icam" value="«interface»&#xa;ICameraService" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#b85450;fontStyle=2;" vertex="1" parent="layer_svc">
+          <mxGeometry x="20" y="50" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s_frame" value="FrameAnalyzer&#xa;(coordenador)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#b85450;" vertex="1" parent="layer_svc">
+          <mxGeometry x="170" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s_lum" value="LuminosityAnalyzer&#xa;(BT.709)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#b85450;" vertex="1" parent="layer_svc">
+          <mxGeometry x="310" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s_coach" value="CoachingEngine&#xa;(debounce + cooldown)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#b85450;" vertex="1" parent="layer_svc">
+          <mxGeometry x="20" y="130" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s_throttle" value="FrameThrottler&#xa;(~6 fps adaptativo)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#b85450;" vertex="1" parent="layer_svc">
+          <mxGeometry x="190" y="130" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s_light" value="LightingAssistant&#xa;(fase 2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#b85450;fontStyle=2;" vertex="1" parent="layer_svc">
+          <mxGeometry x="350" y="130" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER: PLATFORM -->
+        <!-- ═══════════════════════════════════════════ -->
+        <mxCell id="layer_android" value="Platforms/Android" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="310" width="350" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cam" value="CameraService&#xa;(Camera2 API)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#9673a6;" vertex="1" parent="layer_android">
+          <mxGeometry x="20" y="50" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_handler" value="CameraPreviewHandler&#xa;(MAUI → SurfaceView)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#9673a6;" vertex="1" parent="layer_android">
+          <mxGeometry x="180" y="50" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_aspect" value="AspectSurfaceView&#xa;(aspect ratio 4:3)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#9673a6;" vertex="1" parent="layer_android">
+          <mxGeometry x="180" y="130" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pipeline" value="Pipeline Camera2:&#xa;Preview + YUV Analysis + JPEG Photo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="layer_android">
+          <mxGeometry x="20" y="130" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- LAYER: MODELS -->
+        <!-- ═══════════════════════════════════════════ -->
+        <mxCell id="layer_models" value="Models" style="swimlane;startSize=30;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="310" width="500" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="LightingCondition&#xa;(Kind + Suggestion + Color)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#666;" vertex="1" parent="layer_models">
+          <mxGeometry x="20" y="50" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="CoachingTip&#xa;(Category + Message + Severity)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#666;" vertex="1" parent="layer_models">
+          <mxGeometry x="210" y="50" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m3" value="FrameAnalysisResult&#xa;LuminanceStats" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#666;" vertex="1" parent="layer_models">
+          <mxGeometry x="20" y="130" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m4" value="DetectedObject&#xa;ShootingMode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#666;" vertex="1" parent="layer_models">
+          <mxGeometry x="190" y="130" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m5" value="Constants&#xa;(thresholds configuráveis)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#666;" vertex="1" parent="layer_models">
+          <mxGeometry x="360" y="90" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- FLUXO DE DADOS (data flow) -->
+        <!-- ═══════════════════════════════════════════ -->
+        <mxCell id="flow_label" value="Fluxo de dados principal" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="560" width="250" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8dc;strokeColor=#ccc;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="595" width="1100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" value="Câmara" style="rounded=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="615" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="FrameReady&#xa;(event)" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="615" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="FrameAnalyzer" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="340" y="615" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" value="ResultReady&#xa;(event)" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="490" y="615" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" value="CoachingEngine" style="rounded=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="630" y="615" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" value="AppState&#xa;(binding)" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="790" y="615" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" value="Overlays&#xa;(UI)" style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="930" y="615" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- arrows in flow -->
+        <mxCell id="fa1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="f1" target="f2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fa2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="f2" target="f3" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fa3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="f3" target="f4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fa4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="f4" target="f5" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fa5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="f5" target="f6" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fa6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="f6" target="f7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- ARROWS between layers -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <!-- Views → ViewModels (BindingContext) -->
+        <mxCell id="e1" value="BindingContext" style="edgeStyle=orthogonalEdgeStyle;dashed=0;strokeColor=#d6b656;" edge="1" source="layer_views" target="layer_vm" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ViewModels → Services -->
+        <mxCell id="e2" value="usa" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" edge="1" source="layer_vm" target="layer_svc" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Android implements ICameraService -->
+        <mxCell id="e3" value="implementa" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;dashed=1;" edge="1" source="layer_android" target="s_icam" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Services use Models -->
+        <mxCell id="e4" value="produz/consome" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#666;" edge="1" source="layer_svc" target="layer_models" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CameraPreviewHandler → AspectSurfaceView -->
+        <mxCell id="e5" value="cria" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;" edge="1" source="a_handler" target="a_aspect" parent="layer_android">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
