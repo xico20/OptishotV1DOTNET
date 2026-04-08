@@ -7,9 +7,7 @@ namespace OptishotV1DOTNET.Utilities;
 /// </summary>
 /// 
 /*
- C:\adb\platform-tools-latest-windows\platform-tools\adb -s 
- adb-jb9tib6tbuqot4if-5gCFtV._adb-tls-connect._tcp shell run-as com.optishot.v1dotnet cat   
-files/coaching_log.txt
+ C:\adb\platform-tools-latest-windows\platform-tools\adb -s adb-jb9tib6tbuqot4if-5gCFtV._adb-tls-connect._tcp shell run-as com.optishot.v1dotnet cat files/coaching_log.txt
 */
 public static class CoachingLogger
 {

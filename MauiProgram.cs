@@ -46,7 +46,7 @@ public static class MauiProgram
 
         // ── Features ────────────────────────────────────
         builder.Services.AddSingleton<CoachingEngine>();
-        builder.Services.AddSingleton<LightingAssistant>();
+        // NOT MVP: builder.Services.AddSingleton<LightingAssistant>();
 
         // ── ViewModels ──────────────────────────────────
         builder.Services.AddTransient<ModeSelectionViewModel>();

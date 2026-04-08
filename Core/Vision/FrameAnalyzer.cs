@@ -19,6 +19,9 @@ public class FrameAnalyzer
     // Previous frame's 8x8 grid means — used to detect camera shake
     private float[]? _previousGridMeans;
 
+    // Latest accelerometer reading — updated via event, read on frame thread
+    private AccelerometerData _latestAccelerometer;
+
     public event EventHandler<FrameAnalysisResult>? ResultReady;
 
     public FrameAnalysisResult? LatestResult { get; private set; }
@@ -27,6 +30,13 @@ public class FrameAnalyzer
     {
         _cameraService = cameraService;
         _cameraService.FrameReady += OnFrameReady;
+
+        if (Accelerometer.Default.IsSupported)
+        {
+            Accelerometer.Default.ReadingChanged += (_, e) => _latestAccelerometer = e.Reading;
+            if (!Accelerometer.Default.IsMonitoring)
+                Accelerometer.Default.Start(SensorSpeed.UI);
+        }
     }
 
     private void OnFrameReady(object? sender, CameraFrameEventArgs e)
@@ -58,11 +68,30 @@ public class FrameAnalyzer
             LightingCondition = condition,
             LuminanceStats = stats,
             ShakeScore = shakeScore,
+            TiltDegrees = ComputeTiltDegrees(),
             DetectedObjects = Array.Empty<DetectedObject>() // Phase 2: ObjectDetectionPipeline
         };
 
         LatestResult = result;
         ResultReady?.Invoke(this, result);
+    }
+
+    // Roll angle from accelerometer gravity vector (portrait mode).
+    // Returns 0 if accelerometer unavailable or phone is nearly flat.
+    private float ComputeTiltDegrees()
+    {
+        if (!Accelerometer.Default.IsSupported || !Accelerometer.Default.IsMonitoring)
+            return 0f;
+
+        var a = _latestAccelerometer.Acceleration;
+
+        // If XY magnitude is too small, phone is nearly horizontal — tilt undefined
+        float xyMag = MathF.Sqrt(a.X * a.X + a.Y * a.Y);
+        if (xyMag < 0.5f)
+            return 0f;
+
+        // atan2(X, Y): 0° when upright, positive when tilted clockwise (right side down)
+        return (float)(Math.Atan2(a.X, a.Y) * 180.0 / Math.PI);
     }
 
     public void Reset()

@@ -46,13 +46,14 @@
                 HorizontalOptions="Fill"
                 IsVisible="{Binding AppState.DetectedClutter, Converter={StaticResource CollectionHasItemsConverter}}" />
 
-            <!-- Feature toggles -->
+            <!-- NOT MVP: Light e Clean toggles não fazem nada ainda
             <components:ModeSelector
                 HorizontalOptions="Center"
                 LightingEnabled="{Binding AppState.LightingFeatureEnabled}"
                 CompositionEnabled="{Binding AppState.CompositionFeatureEnabled}"
                 ToggleLightingCommand="{Binding ToggleLightingCommand}"
                 ToggleCompositionCommand="{Binding ToggleCompositionCommand}" />
+            -->
 
             <!-- Camera controls row -->
             <Grid ColumnDefinitions="*,Auto,*" VerticalOptions="Center">

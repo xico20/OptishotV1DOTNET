@@ -33,7 +33,7 @@ public static class Constants
     // Don't repeat the same category of tip more often than this
     public const double CoachingCooldownSecs = 1.5;
     // Cooldown for the "Good light" improvement tip
-    public const double GoodLightCooldownSecs = 8.0;
+    public const double GoodLightCooldownSecs = 5.0;
     // Cooldown for the "Perfect light!" celebration tip
     public const double ExcellentCooldownSecs = 20.0;
     // Max number of tips shown at once on screen
@@ -46,6 +46,12 @@ public static class Constants
     public const float BlurThreshold = 0.2f;
     // Cooldown for shake/blur tips (short — condition changes quickly)
     public const double StabilityCooldownSecs = 2.0;
+
+    // ── Alignment (tilt) ────────────────────────────────────────────────────
+    // Tilt below this (in degrees) is considered level — don't nag for tiny wobbles
+    public const float TiltThresholdDegrees = 2.0f;
+    // Cooldown for tilt tips — gives user time to adjust before repeating
+    public const double TiltCooldownSecs = 4.0;
 
     // ── Composition ─────────────────────────────────────────────────────────
     // Object must appear in this many consecutive frames before it's reported as clutter

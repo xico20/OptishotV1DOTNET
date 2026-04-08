@@ -30,11 +30,16 @@ public class LuminanceStats
 
     public string BrightestDirectionHint => BrightestQuadrant switch
     {
-        0 => "upper-left",
-        1 => "upper-right",
-        2 => "lower-left",
-        3 => "lower-right",
-        _ => "side"
+        // 0 => "upper-left",
+        0 => "superior esquerdo",
+        // 1 => "upper-right",
+        1 => "superior direito",
+        // 2 => "lower-left",
+        2 => "inferior esquerdo",
+        // 3 => "lower-right",
+        3 => "inferior direito",
+        // _ => "side"
+        _ => "lateral"
     };
 }
 
@@ -47,6 +52,9 @@ public class FrameAnalysisResult
 
     // 0=still, 1=very shaky — computed by FrameAnalyzer comparing consecutive grid means
     public float ShakeScore { get; init; }
+
+    // Tilt angle in degrees: 0=level, positive=clockwise (right side down), negative=counter-clockwise
+    public float TiltDegrees { get; init; }
 
     public IEnumerable<DetectedObject> ClutterObjects =>
         DetectedObjects.Where(o => o.IsClutter);

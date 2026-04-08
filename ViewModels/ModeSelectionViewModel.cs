@@ -17,8 +17,7 @@ public partial class ModeSelectionViewModel : ObservableObject
     {
         new(ShootingMode.Aesthetic, "Aesthetic", "✦"),
         new(ShootingMode.Product,   "Product",   "■"),
-        new(ShootingMode.Portrait,  "Portrait",  "◉"),
-        new(ShootingMode.Food,      "Food",      "◈"),
+        new(ShootingMode.Portrait,  "Portrait",  "◉") 
     };
 
     [RelayCommand]

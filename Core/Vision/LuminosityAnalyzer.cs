@@ -136,16 +136,20 @@ public class LuminosityAnalyzer
         if (mean < Constants.DarkThreshold)
         {
             string suggestion = mean < 0.10f
-                ? $"Very dark scene. Move toward the {brightestDir} light source."
-                : $"Too dark. Add light from the {brightestDir} direction.";
+                // ? $"Very dark scene. Move toward the {brightestDir} light source."
+                ? $"Cena muito escura. Move-te para a fonte de luz {brightestDir}."
+                // : $"Too dark. Add light from the {brightestDir} direction.";
+                : $"Demasiado escuro. Adiciona luz do lado {brightestDir}.";
             return LightingCondition.TooDark(suggestion);
         }
 
         if (mean > Constants.BrightThreshold)
-            return LightingCondition.TooBright("Too much light. Reduce direct light or use diffusion.");
+            // return LightingCondition.TooBright("Too much light. Reduce direct light or use diffusion.");
+            return LightingCondition.TooBright("Luz a mais. Reduz a luz direta ou usa difusão.");
 
         if (stdDev > Constants.HarshContrastThreshold)
-            return LightingCondition.HarshShadows("Harsh shadows detected. Try diffusing the light source.");
+            // return LightingCondition.HarshShadows("Harsh shadows detected. Try diffusing the light source.");
+            return LightingCondition.HarshShadows("Sombras duras detetadas. Tenta difundir a fonte de luz.");
 
         // Sweet spot: mean in [0.35, 0.65], low contrast, but not a uniformly flat/obscured scene
         if (mean is >= Constants.ExcellentLowMean and <= Constants.ExcellentHighMean
